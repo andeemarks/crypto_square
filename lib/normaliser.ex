@@ -1,4 +1,10 @@
 defmodule Normaliser do
+  def run do
+    receive do
+      text -> normalise(text)
+    end
+  end
+
   @spec normalise(String.t()) :: String.t()
   def normalise(text) do
     text
