@@ -8,22 +8,6 @@ defmodule CryptoSquareTest do
              "imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau "
   end
 
-  test "normalising lower case single words does nothing" do
-    assert CryptoSquare.normalise("foo") == "foo"
-  end
-
-  test "normalising mixed case words converts to lower case" do
-    assert CryptoSquare.normalise("Foo") == "foo"
-  end
-
-  test "normalising multiple words removes spaces" do
-    assert CryptoSquare.normalise(" Foo bar ") == "foobar"
-  end
-
-  test "normalising sentences removes punctuation" do
-    assert CryptoSquare.normalise("First, second: third! ") == "firstsecondthird"
-  end
-
   test "row length for empty string is 0" do
     assert CryptoSquare.row_length("") == 0
   end

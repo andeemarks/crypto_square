@@ -13,7 +13,7 @@ defmodule CryptoSquare do
 
   """
   def encrypt(plaintext) do
-    normal_plaintext = normalise(plaintext)
+    normal_plaintext = Normaliser.normalise(plaintext)
     row_length = row_length(normal_plaintext)
 
     encrypt(normal_plaintext, row_length)
@@ -47,13 +47,6 @@ defmodule CryptoSquare do
     |> Enum.map(&Tuple.to_list/1)
     |> Enum.map(&Enum.join/1)
     |> Enum.join(" ")
-  end
-
-  @spec normalise(String.t()) :: String.t()
-  def normalise(text) do
-    text
-    |> String.downcase()
-    |> String.replace(~r/[^a-z1-9]/, "")
   end
 
   @spec row_length(String.t()) :: integer
