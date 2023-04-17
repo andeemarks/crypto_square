@@ -12,11 +12,23 @@ defmodule CryptoSquare do
       :world
 
   """
-  def encrypt(plaintext) do
-    normal_plaintext = Normaliser.normalise(plaintext)
-    row_length = row_length(normal_plaintext)
+  def encrypt() do
+    receive do
+      {plaintext} ->
+        # IO.puts("CryptoSquare#encrypt#1")
+        normaliser = spawn(Normaliser, :run, [])
+        # normal_plaintext = Normaliser.normalise(plaintext)
+        send(normaliser, {self(), plaintext})
+        encrypt()
 
-    encrypt(normal_plaintext, row_length)
+      {_, normal_plaintext} ->
+        # IO.puts("CryptoSquare#encrypt#2")
+        row_length = row_length(normal_plaintext)
+
+        ciphertext = encrypt(normal_plaintext, row_length)
+        IO.puts(ciphertext)
+        encrypt()
+    end
   end
 
   def encrypt(_, 0), do: ""
