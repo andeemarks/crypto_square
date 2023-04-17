@@ -2,7 +2,7 @@ defmodule RowLength do
   def run() do
     receive do
       {sender, text} ->
-        IO.puts("RowLength#run")
+        # IO.puts("RowLength#run")
         send(sender, {self(), :row_length, text, row_length(text)})
     end
   end
