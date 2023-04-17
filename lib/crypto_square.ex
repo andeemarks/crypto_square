@@ -15,16 +15,19 @@ defmodule CryptoSquare do
   def encrypt() do
     receive do
       {plaintext} ->
-        # IO.puts("CryptoSquare#encrypt#1")
+        IO.puts("CryptoSquare#encrypt#1")
         normaliser = spawn(Normaliser, :run, [])
-        # normal_plaintext = Normaliser.normalise(plaintext)
         send(normaliser, {self(), plaintext})
         encrypt()
 
-      {_, normal_plaintext} ->
-        # IO.puts("CryptoSquare#encrypt#2")
-        row_length = row_length(normal_plaintext)
+      {_, :normal_plaintext, normal_plaintext} ->
+        IO.puts("CryptoSquare#encrypt#2")
+        row_length = spawn(RowLength, :run, [])
+        send(row_length, {self(), normal_plaintext})
+        encrypt()
 
+      {_, :row_length, normal_plaintext, row_length} ->
+        IO.puts("CryptoSquare#encrypt#3")
         ciphertext = encrypt(normal_plaintext, row_length)
         IO.puts(ciphertext)
         encrypt()
@@ -59,14 +62,6 @@ defmodule CryptoSquare do
     |> Enum.map(&Tuple.to_list/1)
     |> Enum.map(&Enum.join/1)
     |> Enum.join(" ")
-  end
-
-  @spec row_length(String.t()) :: integer
-  def row_length(text) do
-    text
-    |> String.length()
-    |> :math.sqrt()
-    |> round_up
   end
 
   defp round_up(n), do: trunc(Float.ceil(n))

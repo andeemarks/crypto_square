@@ -2,8 +2,8 @@ defmodule Normaliser do
   def run do
     receive do
       {sender, text} ->
-        # IO.puts("Normaliser#run")
-        send(sender, {self(), normalise(text)})
+        IO.puts("Normaliser#run")
+        send(sender, {self(), :normal_plaintext, normalise(text)})
     end
   end
 
