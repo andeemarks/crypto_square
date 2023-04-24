@@ -36,7 +36,7 @@ defmodule CryptoSquare do
 
       {_, :encrypt, ciphertext} ->
         Logger.debug("CryptoSquare#encrypt: #{ciphertext}")
-        IO.puts("Ciphertext: #{ciphertext}")
+        Logger.info("Ciphertext: #{ciphertext}")
         encrypt()
     end
   end
