@@ -3,6 +3,13 @@ defmodule EncryptTest do
 
   @moduletag :capture_log
 
+  test "encrypted ciphertext returned to caller" do
+    encrypt = spawn(Encrypt, :run, [])
+    send(encrypt, {self(), "abcde", 3})
+
+    assert_receive {_, :ciphertext, "ad be c "}
+  end
+
   test "right sizing text ensures the length evenly fits a rectangle" do
     assert Encrypt.size_to_rectangle("ab", 2) == "ab"
     assert Encrypt.size_to_rectangle("abcde", 3) == "abcde "
