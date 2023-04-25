@@ -4,6 +4,8 @@ defmodule Encrypt do
       {sender, text, row_length} ->
         send(sender, {self(), :ciphertext, encrypt(text, row_length)})
     end
+
+    run()
   end
 
   def encrypt(_, 0), do: ""
