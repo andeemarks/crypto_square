@@ -40,6 +40,10 @@ defmodule CryptoSquare do
         Logger.debug("CryptoSquare#ciphertext: #{ciphertext}")
         Logger.info("Ciphertext: #{ciphertext}")
         ciphertext
+
+      other ->
+        Logger.error("Unknown message received")
+        raise "Unknown message"
     end
   end
 end

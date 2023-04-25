@@ -15,18 +15,23 @@ defmodule CryptoSquareTest do
   end
 
   test "receives a normalised plaintext", context do
-    assert send(context[:cs], {:normal_plaintext, context[:plaintext]}) ==
-             {:normal_plaintext, context[:plaintext]}
+    assert send(context[:cs], {self(), :normal_plaintext, context[:plaintext]}) ==
+             {self(), :normal_plaintext, context[:plaintext]}
   end
 
   test "receives a calculated row_length for plaintext", context do
-    assert send(context[:cs], {:row_length, context[:plaintext], 3}) ==
-             {:row_length, context[:plaintext], 3}
+    assert send(context[:cs], {self(), :row_length, context[:plaintext], 3}) ==
+             {self(), :row_length, context[:plaintext], 3}
   end
 
   test "receives an encrypted ciphertext", context do
     ciphertext = "imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau"
 
-    assert send(context[:cs], {:ciphertext, ciphertext}) == {:ciphertext, ciphertext}
+    assert send(context[:cs], {self(), :ciphertext, ciphertext}) ==
+             {self(), :ciphertext, ciphertext}
   end
+
+  # test "fails to handle other types of message", context do
+  #   catch_throw(send(context[:cs], {:foo}))
+  # end
 end
