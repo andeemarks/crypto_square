@@ -5,6 +5,8 @@ defmodule RowLength do
         # IO.puts("RowLength#run")
         send(sender, {self(), :row_length, text, row_length(text)})
     end
+
+    run()
   end
 
   @spec row_length(String.t()) :: integer
