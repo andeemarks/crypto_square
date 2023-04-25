@@ -8,17 +8,16 @@ defmodule Encrypt do
     run()
   end
 
-  def encrypt(_, 0), do: ""
+  defp encrypt(_, 0), do: ""
 
-  def encrypt(text, row_length) do
+  defp encrypt(text, row_length) do
     text
     |> size_to_rectangle(row_length)
     |> break_into_rows(row_length)
     |> rows_to_rectangle
   end
 
-  @spec size_to_rectangle(String.t(), integer) :: String.t()
-  def size_to_rectangle(text, row_length) do
+  defp size_to_rectangle(text, row_length) do
     rectangle_size = round_up(String.length(text) / row_length) * row_length
 
     String.pad_trailing(text, rectangle_size)
