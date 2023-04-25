@@ -1,21 +1,15 @@
 # CryptoSquare
 
-**TODO: Add description**
+This is an Elixir implementation of a simple encoding algorithm called Crypto Square.
 
-## Installation
+Just to make the implementation more "interesting" (i.e., needlessly complicated), I've split the parts of the algorithm across multiple Elixir processes :-)
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `crypto_square` to your list of dependencies in `mix.exs`:
+## Running the tests
 
-```elixir
-def deps do
-  [
-    {:crypto_square, "~> 0.1.0"}
-  ]
-end
-```
+`mix test`
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/crypto_square>.
+## Running the code (with canned input)
 
+`iex -S mix`
+
+Note: this command executes the code in `runner.ex`
