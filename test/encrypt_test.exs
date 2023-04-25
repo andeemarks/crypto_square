@@ -1,6 +1,8 @@
 defmodule EncryptTest do
   use ExUnit.Case
 
+  @moduletag :capture_log
+
   test "right sizing text ensures the length evenly fits a rectangle" do
     assert Encrypt.size_to_rectangle("ab", 2) == "ab"
     assert Encrypt.size_to_rectangle("abcde", 3) == "abcde "

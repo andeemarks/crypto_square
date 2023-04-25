@@ -1,6 +1,8 @@
 defmodule CryptoSquareTest do
   use ExUnit.Case
 
+  @moduletag :capture_log
+
   setup _context do
     {:ok,
      [

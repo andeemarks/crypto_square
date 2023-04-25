@@ -1,6 +1,8 @@
 defmodule RowLengthTest do
   use ExUnit.Case
 
+  @moduletag :capture_log
+
   test "row length for empty string is 0" do
     assert RowLength.row_length("") == 0
   end

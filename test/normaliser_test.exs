@@ -1,6 +1,8 @@
 defmodule NormaliserTest do
   use ExUnit.Case
 
+  @moduletag :capture_log
+
   test "normalising lower case single words does nothing" do
     assert Normaliser.normalise("foo") == "foo"
   end
