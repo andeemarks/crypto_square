@@ -10,7 +10,8 @@ defmodule CryptoSquareTest do
   end
 
   test "starts with a plaintext argument", context do
-    assert send(context[:cs], {:start, context[:plaintext]}) == {:start, context[:plaintext]}
+    assert send(context[:cs], {:plaintext, context[:plaintext]}) ==
+             {:plaintext, context[:plaintext]}
   end
 
   test "receives a normalised plaintext", context do
@@ -26,6 +27,6 @@ defmodule CryptoSquareTest do
   test "receives an encrypted ciphertext", context do
     ciphertext = "imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau"
 
-    assert send(context[:cs], {:encrypt, ciphertext}) == {:encrypt, ciphertext}
+    assert send(context[:cs], {:ciphertext, ciphertext}) == {:ciphertext, ciphertext}
   end
 end

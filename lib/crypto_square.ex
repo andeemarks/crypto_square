@@ -19,7 +19,7 @@ defmodule CryptoSquare do
   def encrypt() do
     receive do
       {:plaintext, plaintext} ->
-        Logger.debug("CryptoSquare#start: #{plaintext}")
+        Logger.debug("CryptoSquare#plaintext: #{plaintext}")
         normaliser = spawn(Normaliser, :run, [])
         send(normaliser, {self(), plaintext})
         encrypt()
@@ -36,8 +36,8 @@ defmodule CryptoSquare do
         send(encrypter, {self(), normal_plaintext, row_length})
         encrypt()
 
-      {_, :encrypt, ciphertext} ->
-        Logger.debug("CryptoSquare#encrypt: #{ciphertext}")
+      {_, :ciphertext, ciphertext} ->
+        Logger.debug("CryptoSquare#ciphertext: #{ciphertext}")
         Logger.info("Ciphertext: #{ciphertext}")
         ciphertext
     end

@@ -3,7 +3,7 @@ defmodule Encrypt do
     receive do
       {sender, text, row_length} ->
         # IO.puts("Encrypt#run")
-        send(sender, {self(), :encrypt, encrypt(text, row_length)})
+        send(sender, {self(), :ciphertext, encrypt(text, row_length)})
     end
   end
 
