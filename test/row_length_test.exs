@@ -7,41 +7,29 @@ defmodule RowLengthTest do
     {:ok, [row_length: spawn(RowLength, :run, [])]}
   end
 
+  def assert_row_length_for(context, text, expected_row_length) do
+    send(context[:row_length], {self(), text})
+    assert_receive {_, :row_length, text, expected_row_length}
+  end
+
   test "row length for empty string is 0", context do
-    send(context[:row_length], {self(), ""})
-    assert_receive {_, :row_length, "", 0}
+    assert_row_length_for(context, "", 0)
   end
 
   test "row length for string length that is a perfect square is the corresponding square root",
        context do
-    send(context[:row_length], {self(), "a"})
-    assert_receive {_, :row_length, "a", 1}
-
-    send(context[:row_length], {self(), "abcd"})
-    assert_receive {_, :row_length, "abcd", 2}
-
-    send(context[:row_length], {self(), "abcdefghi"})
-    assert_receive {_, :row_length, "abcdefghi", 3}
-
-    send(context[:row_length], {self(), "abcdefghijklmnop"})
-    assert_receive {_, :row_length, "abcdefghijklmnop", 4}
+    assert_row_length_for(context, "a", 1)
+    assert_row_length_for(context, "abcd", 2)
+    assert_row_length_for(context, "abcdefghi", 3)
+    assert_row_length_for(context, "abcdefghijklmnop", 4)
   end
 
   test "row length for string length that is not a perfect square is larger than the corresponding root",
        context do
-    send(context[:row_length], {self(), "abc"})
-    assert_receive {_, :row_length, "abc", 2}
-
-    send(context[:row_length], {self(), "abcdef"})
-    assert_receive {_, :row_length, "abcdef", 3}
-
-    send(context[:row_length], {self(), "abcdefghijklmno"})
-    assert_receive {_, :row_length, "abcdefghijklmno", 4}
-
-    send(context[:row_length], {self(), "abcdefghijklmnopqrst"})
-    assert_receive {_, :row_length, "abcdefghijklmnopqrst", 5}
-
-    send(context[:row_length], {self(), "ifmanwasmeanttostayonthegroundgodwouldhavegivenusroots"})
-    assert_receive {_, :row_length, "ifmanwasmeanttostayonthegroundgodwouldhavegivenusroots", 8}
+    assert_row_length_for(context, "abc", 2)
+    assert_row_length_for(context, "abcdef", 3)
+    assert_row_length_for(context, "abcdefghijklmno", 4)
+    assert_row_length_for(context, "abcdefghijklmnopqrst", 5)
+    assert_row_length_for(context, "ifmanwasmeanttostayonthegroundgodwouldhavegivenusroots", 8)
   end
 end
