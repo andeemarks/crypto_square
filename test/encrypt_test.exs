@@ -9,7 +9,6 @@ defmodule EncryptTest do
 
   test "encrypted ciphertext returned to caller", context do
     send(context[:encrypt], {self(), "abcde", 3})
-
     assert_receive {_, :ciphertext, "ad be c "}
 
     send(context[:encrypt], {self(), "ifmanwasmeanttostayonthegroundgodwouldhavegivenusroots", 8})

@@ -5,6 +5,8 @@ defmodule Normaliser do
         # IO.puts("Normaliser#run")
         send(sender, {self(), :normal_plaintext, normalise(text)})
     end
+
+    run()
   end
 
   @spec normalise(String.t()) :: String.t()

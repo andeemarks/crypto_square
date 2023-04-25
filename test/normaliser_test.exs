@@ -3,19 +3,30 @@ defmodule NormaliserTest do
 
   @moduletag :capture_log
 
-  test "normalising lower case single words does nothing" do
-    assert Normaliser.normalise("foo") == "foo"
+  setup do
+    {:ok, [normaliser: spawn(Normaliser, :run, [])]}
   end
 
-  test "normalising mixed case words converts to lower case" do
-    assert Normaliser.normalise("Foo") == "foo"
+  test "normalising lower case single words does nothing", context do
+    send(context[:normaliser], {self(), "foo"})
+    assert_receive {_, :normal_plaintext, "foo"}
   end
 
-  test "normalising multiple words removes spaces" do
-    assert Normaliser.normalise(" Foo bar ") == "foobar"
+  test "normalising mixed case words converts to lower case", context do
+    send(context[:normaliser], {self(), "Foo"})
+    assert_receive {_, :normal_plaintext, "foo"}
+
+    send(context[:normaliser], {self(), "ooF"})
+    assert_receive {_, :normal_plaintext, "oof"}
   end
 
-  test "normalising sentences removes punctuation" do
-    assert Normaliser.normalise("First, second: third! ") == "firstsecondthird"
+  test "normalising multiple words removes spaces", context do
+    send(context[:normaliser], {self(), "Foo bar"})
+    assert_receive {_, :normal_plaintext, "foobar"}
+  end
+
+  test "normalising sentences removes punctuation", context do
+    send(context[:normaliser], {self(), "First, second: third! "})
+    assert_receive {_, :normal_plaintext, "firstsecondthird"}
   end
 end
