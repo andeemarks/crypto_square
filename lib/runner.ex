@@ -4,7 +4,7 @@ defmodule Runner do
 
     send(
       crypto_square,
-      {:start, "If man was meant to stay on the ground, god would have given us roots."}
+      {:plaintext, "If man was meant to stay on the ground, god would have given us roots."}
     )
   end
 end

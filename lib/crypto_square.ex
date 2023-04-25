@@ -6,17 +6,19 @@ defmodule CryptoSquare do
   """
 
   @doc """
-  Hello world.
-
   ## Examples
 
-      iex> CryptoSquare.hello()
-      :world
+      iex> crypto_square = spawn(CryptoSquare, :encrypt, [])
 
+    send(
+      crypto_square,
+      {:start, "If man was meant to stay on the ground, god would have given us roots."}
+    )
+     
   """
   def encrypt() do
     receive do
-      {:start, plaintext} ->
+      {:plaintext, plaintext} ->
         Logger.debug("CryptoSquare#start: #{plaintext}")
         normaliser = spawn(Normaliser, :run, [])
         send(normaliser, {self(), plaintext})
@@ -37,7 +39,7 @@ defmodule CryptoSquare do
       {_, :encrypt, ciphertext} ->
         Logger.debug("CryptoSquare#encrypt: #{ciphertext}")
         Logger.info("Ciphertext: #{ciphertext}")
-        encrypt()
+        ciphertext
     end
   end
 end
