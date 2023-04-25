@@ -32,8 +32,4 @@ defmodule CryptoSquareTest do
     assert send(context[:cs], {self(), :ciphertext, ciphertext}) ==
              {self(), :ciphertext, ciphertext}
   end
-
-  # test "fails to handle other types of message", context do
-  #   catch_throw(send(context[:cs], {:foo}))
-  # end
 end
