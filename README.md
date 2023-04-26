@@ -1,6 +1,6 @@
 # CryptoSquare
 
-https://github.com/andeemarks/crypto_square/actions/workflows/elixir.yml/badge.svg
+![Test status](https://github.com/andeemarks/crypto_square/actions/workflows/elixir.yml/badge.svg)
 
 This is an Elixir implementation of a simple encoding algorithm called Crypto Square.
 
