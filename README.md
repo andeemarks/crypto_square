@@ -12,7 +12,7 @@ Just to make the implementation more "interesting" (i.e., needlessly complicated
 
 `iex -S mix`
 
-Note: this command executes the code in `runner.ex`
+Note: this command executes the code in [`runner.ex`](lib/runner.ex).
 
 ## How Crypto Square works
 
