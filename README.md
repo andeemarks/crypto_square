@@ -33,3 +33,5 @@ _The normalised plaintext is arranged into a rectangular grid._
 ![](resources/cs-consolidate.png)
 
 _The ciphertext is formed by "reading" down each of the columns and joining the resultant columns together._
+
+More details about the details of the algo can be found on [Exercism](https://exercism.org/tracks/javascript/exercises/crypto-square).
