@@ -1,6 +1,8 @@
 require Logger
 
 defmodule CryptoSquare do
+  use Task
+
   @moduledoc """
   Documentation for `CryptoSquare`.
   """
