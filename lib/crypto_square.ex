@@ -39,7 +39,9 @@ defmodule CryptoSquare do
       {_, :ciphertext, ciphertext} ->
         Logger.debug("CryptoSquare#ciphertext: #{ciphertext}")
         Logger.info("Ciphertext: #{ciphertext}")
-        ciphertext
+
+      _ ->
+        raise "Unexpected message received"
     end
   end
 end
