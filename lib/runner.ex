@@ -1,10 +1,12 @@
 defmodule Runner do
   def new() do
-    crypto_square = spawn(CryptoSquare, :encrypt, [])
+    task =
+      Task.async(fn ->
+        CryptoSquare.encrypt(
+          "If man was meant to stay on the ground, god would have given us roots."
+        )
+      end)
 
-    send(
-      crypto_square,
-      {:plaintext, "If man was meant to stay on the ground, god would have given us roots."}
-    )
+    IO.puts("Ciphertext: #{Task.await(task)}")
   end
 end

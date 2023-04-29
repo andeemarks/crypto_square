@@ -7,16 +7,14 @@ defmodule CryptoSquareTest do
     {:ok,
      [
        cs: spawn(CryptoSquare, :encrypt, []),
-       plaintext: "If man was meant to stay on the ground, god would have given us roots."
+       plaintext: "If man was meant to stay on the ground, god would have given us roots.",
+       ciphertext: "imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau "
      ]}
   end
 
-  test "starts with a plaintext argument", context do
-    assert send(
-             context[:cs],
-             {:plaintext, context[:plaintext]}
-           ) ==
-             {:plaintext, context[:plaintext]}
+  test "encrypts a plaintext argument into ciphertext", context do
+    assert CryptoSquare.encrypt(context[:plaintext]) ==
+             {:ciphertext, context[:ciphertext]}
   end
 
   test "receives a normalised plaintext", context do
@@ -36,13 +34,11 @@ defmodule CryptoSquareTest do
   end
 
   test "receives an encrypted ciphertext", context do
-    ciphertext = "imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau"
-
     assert send(
              context[:cs],
-             {self(), :ciphertext, ciphertext}
+             {self(), :ciphertext, context[:ciphertext]}
            ) ==
-             {self(), :ciphertext, ciphertext}
+             {self(), :ciphertext, context[:ciphertext]}
   end
 
   test "fails on unexpected messages", context do
