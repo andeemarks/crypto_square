@@ -18,7 +18,7 @@ defmodule Encrypt do
   end
 
   defp size_to_rectangle(text, row_length) do
-    rectangle_size = round_up(String.length(text) / row_length) * row_length
+    rectangle_size = Rounding.round_up(String.length(text) / row_length) * row_length
 
     String.pad_trailing(text, rectangle_size)
   end
@@ -36,6 +36,4 @@ defmodule Encrypt do
     |> Enum.map(&Enum.join/1)
     |> Enum.join(" ")
   end
-
-  defp round_up(n), do: trunc(Float.ceil(n))
 end

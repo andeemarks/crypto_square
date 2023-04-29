@@ -12,8 +12,6 @@ defmodule RowLength do
     text
     |> String.length()
     |> :math.sqrt()
-    |> round_up
+    |> Rounding.round_up()
   end
-
-  defp round_up(n), do: trunc(Float.ceil(n))
 end
