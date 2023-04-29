@@ -7,6 +7,6 @@ defmodule Runner do
         )
       end)
 
-    IO.puts("Ciphertext: #{Task.await(task)}")
+    IO.inspect(Task.await(task))
   end
 end
