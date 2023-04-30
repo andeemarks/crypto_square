@@ -9,7 +9,7 @@ defmodule RowLengthTest do
 
   def assert_row_length_for(context, text, expected_row_length) do
     send(context[:row_length], {self(), text})
-    assert_receive {_, :row_length, text, expected_row_length}
+    assert_receive({_, :row_length, ^text, ^expected_row_length})
   end
 
   test "row length for empty string is 0", context do
